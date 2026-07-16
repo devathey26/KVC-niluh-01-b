@@ -1,21 +1,21 @@
-import { MapPin, School, Target, Heart } from 'lucide-react';
+import { MapPin, Palette, Layers, Sparkles } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 
-const features = [
+const pillars = [
   {
-    icon: School,
-    title: 'Fokus vokasi',
-    body: 'Design Communication Visual di SMK TI Bali Global Denpasar — tempat karya bertemu industri.',
+    icon: Palette,
+    title: 'Visual yang bicara',
+    body: 'Tipografi, warna, dan komposisi — kami percaya desain yang baik tidak perlu berteriak.',
   },
   {
-    icon: Target,
-    title: 'Dibuat agar rapi',
-    body: 'Jadwal, pengumuman, resources, dan acara dalam satu tempat — kejelasan jadi prioritas.',
+    icon: Layers,
+    title: 'Proses, bukan hasil saja',
+    body: 'Setiap karya melewati kritik, revisi, dan review. Kami bangga pada prosesnya.',
   },
   {
-    icon: Heart,
-    title: 'Dibuat oleh kelas',
-    body: 'Dirancang dan dirawat oleh siswa XI DKV 2 sebagai portfolio hidup cara kami bekerja.',
+    icon: Sparkles,
+    title: 'Kelas yang merawat',
+    body: 'Ruang ini dirancang dan dirawat oleh siswa — sebagai cara kami belajar bertanggung jawab.',
   },
 ];
 
@@ -28,31 +28,32 @@ export default function About() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div className="reveal">
-            <span className="section-eyebrow">
-              <span className="h-px w-6 bg-brand-400/60" />
-              Tentang
-            </span>
-            <h2 className="section-title mt-3">Rumah digital, bukan tugas sekolah.</h2>
-            <p className="section-sub">
-              Kavitwo adalah rumah digital Kelas XI DKV 2 — kelas vokasi Design
-              Communication Visual di SMK TI Bali Global Denpasar. Kami membangun
-              ruang ini untuk mencerminkan cara kami bekerja: rapi, tenang, dan
-              sedikit berpendapat tentang tipografi.
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <span className="chip border-brand-400/30 bg-brand-500/10 text-brand-200">
-                <MapPin className="h-3.5 w-3.5" />
-                Denpasar, Bali
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          {/* Left: copy + pillars */}
+          <div className="reveal flex flex-col justify-between">
+            <div>
+              <span className="section-eyebrow">
+                <span className="h-px w-6 bg-brand-400/60" />
+                Tentang
               </span>
-              <span className="chip">Berdiri sejak 2024</span>
-              <span className="chip">30 siswa</span>
+              <h2 className="section-title mt-3">Bukan kelas biasa.</h2>
+              <p className="section-sub mt-3">
+                Kami adalah kelas vokasi Design Communication Visual yang
+                percaya pada kerja tangan, kritik yang jujur, dan karya yang
+                sederhana namun dipikirkan dengan matang.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                <span className="chip border-brand-400/30 bg-brand-500/10 text-brand-200">
+                  <MapPin className="h-3.5 w-3.5" />
+                  Denpasar, Bali
+                </span>
+                <span className="chip">30 siswa</span>
+              </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {features.map((f) => {
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {pillars.map((f) => {
                 const Icon = f.icon;
                 return (
                   <div
@@ -70,11 +71,11 @@ export default function About() {
             </div>
           </div>
 
-          {/* Visual side */}
-          <div className="reveal" style={{ transitionDelay: '120ms' }}>
-            <div className="card-surface relative overflow-hidden p-6 sm:p-8">
+          {/* Right: info card — matches left column height via items-stretch */}
+          <div className="reveal flex" style={{ transitionDelay: '120ms' }}>
+            <div className="card-surface relative w-full overflow-hidden p-6 sm:p-8 flex flex-col">
               <div className="pointer-events-none absolute -top-20 -right-16 h-56 w-56 rounded-full bg-brand-500/15 blur-3xl" />
-              <div className="relative">
+              <div className="relative flex flex-col h-full">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full bg-rose-400/80" />
@@ -89,7 +90,7 @@ export default function About() {
                   <div className="text-sm text-ink-300">Kelas XI DKV 2 · DKV</div>
                 </div>
 
-                <div className="mt-6 space-y-2">
+                <div className="mt-6 space-y-2 flex-1">
                   {[
                     { k: 'Sekolah', v: 'SMK TI Bali Global Denpasar' },
                     { k: 'Program', v: 'Design Communication Visual' },

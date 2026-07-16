@@ -1,4 +1,4 @@
-import { Sparkles, Instagram, Mail, MapPin, Phone, Globe, ArrowLeft } from 'lucide-react';
+import { Sparkles, Instagram, ArrowLeft, MessageSquare, Music2 } from 'lucide-react';
 import { publicNav } from '../../lib/data';
 
 export default function Footer({ onHome }: { onHome: () => void }) {
@@ -16,10 +16,7 @@ export default function Footer({ onHome }: { onHome: () => void }) {
               <span className="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-cream-50 shadow-glow">
                 <Sparkles className="h-4 w-4" />
               </span>
-              <div className="flex flex-col leading-none">
-                <span className="font-display text-lg font-bold text-ink-50">Kavitwo</span>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-ink-400">Class XI DKV 2</span>
-              </div>
+              <span className="font-display text-lg font-bold text-ink-50">Kavitwo</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-ink-300 leading-relaxed">
               Rumah digital Kelas XI DKV 2, SMK TI Bali Global Denpasar.
@@ -28,20 +25,20 @@ export default function Footer({ onHome }: { onHome: () => void }) {
             </p>
 
             <div className="mt-5 flex items-center gap-2">
-              {[
-                { Icon: Instagram, label: 'Instagram' },
-                { Icon: Mail, label: 'Email' },
-                { Icon: Globe, label: 'Website' },
-              ].map(({ Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-ink-200 hover:bg-white/10 hover:text-brand-200 hover:-translate-y-0.5 transition-all duration-300 ease-smooth"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-ink-200 hover:bg-white/10 hover:text-brand-200 hover:-translate-y-0.5 transition-all duration-300 ease-smooth"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a
+                href="#"
+                aria-label="TikTok"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-ink-200 hover:bg-white/10 hover:text-brand-200 hover:-translate-y-0.5 transition-all duration-300 ease-smooth"
+              >
+                <Music2 className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
@@ -59,29 +56,21 @@ export default function Footer({ onHome }: { onHome: () => void }) {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Feedback */}
           <div className="md:col-span-4">
-            <h4 className="text-xs uppercase tracking-wider text-ink-400">Kontak</h4>
-            <ul className="mt-4 space-y-3 text-sm text-ink-200">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-brand-300 mt-0.5 shrink-0" />
-                <span>
-                  SMK TI Bali Global Denpasar
-                  <br />
-                  Jl. Kamboja No.12, Denpasar, Bali
-                </span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-brand-300 shrink-0" />
-                <span>(0361) 123-4567</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-brand-300 shrink-0" />
-                <a href="mailto:kavitwo@baliglobal.sch.id" className="hover:text-brand-200 transition">
-                  kavitwo@baliglobal.sch.id
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-xs uppercase tracking-wider text-ink-400">Feedback</h4>
+            <p className="mt-4 text-sm text-ink-300 leading-relaxed">
+              Ada saran atau menemukan bug? Bantu kami membuat Kavitwo lebih baik.
+            </p>
+            <a
+              href="https://kavitwo.id/feedback"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 px-5 py-2.5 text-sm font-semibold text-cream-50 shadow-glow hover:-translate-y-0.5 transition-all duration-300 ease-smooth"
+            >
+              <MessageSquare className="h-4 w-4" />
+              Kirim Feedback
+            </a>
           </div>
         </div>
 

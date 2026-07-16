@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X, Sparkles, LayoutDashboard } from 'lucide-react';
 import { publicNav } from '../../lib/data';
 import { useScrolled, scrollTo } from '../../hooks/useReveal';
@@ -6,6 +6,29 @@ import { useScrolled, scrollTo } from '../../hooks/useReveal';
 export default function PublicNavbar({ onPortal }: { onPortal: () => void }) {
   const scrolled = useScrolled(16);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>(publicNav[0]?.href ?? '');
+
+  // Scroll-spy: highlight the section currently in view.
+  useEffect(() => {
+    const sections = publicNav
+      .map((n) => document.querySelector(n.href))
+      .filter((el): el is Element => Boolean(el));
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(`#${visible[0].target.id}`);
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header
@@ -25,24 +48,31 @@ export default function PublicNavbar({ onPortal }: { onPortal: () => void }) {
               <Sparkles className="h-4 w-4" />
               <span className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/20" />
             </span>
-            <span className="flex flex-col leading-none">
-              <span className="font-display text-base font-bold tracking-tight text-ink-50">Kavitwo</span>
-              <span className="text-[10px] uppercase tracking-[0.18em] text-ink-400">XI DKV 2</span>
-            </span>
+            <span className="font-display text-base font-bold tracking-tight text-ink-50">Kavitwo</span>
           </button>
 
           {/* Desktop nav */}
           <ul className="hidden lg:flex items-center gap-1">
-            {publicNav.map((item) => (
-              <li key={item.href}>
-                <button
-                  onClick={() => scrollTo(item.href)}
-                  className="rounded-full px-3.5 py-2 text-sm font-medium text-ink-300 hover:text-ink-50 transition-all duration-300 ease-smooth hover:bg-white/5"
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
+            {publicNav.map((item) => {
+              const isActive = active === item.href;
+              return (
+                <li key={item.href} className="relative">
+                  <button
+                    onClick={() => scrollTo(item.href)}
+                    className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-300 ease-smooth ${
+                      isActive ? 'text-ink-50' : 'text-ink-300 hover:text-ink-50'
+                    }`}
+                  >
+                    {item.label}
+                    <span
+                      className={`absolute left-1/2 -bottom-0.5 h-1 w-1 -translate-x-1/2 rounded-full bg-brand-400 transition-all duration-300 ease-smooth ${
+                        isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                      }`}
+                    />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
           {/* CTA + mobile toggle */}
@@ -72,19 +102,24 @@ export default function PublicNavbar({ onPortal }: { onPortal: () => void }) {
         >
           <div className="glass-strong rounded-3xl p-3 shadow-card">
             <ul className="grid grid-cols-2 gap-1.5">
-              {publicNav.map((item) => (
-                <li key={item.href}>
-                  <button
-                    onClick={() => {
-                      setOpen(false);
-                      scrollTo(item.href);
-                    }}
-                    className="w-full rounded-2xl px-4 py-3 text-left text-sm font-medium text-ink-200 hover:bg-white/5 transition"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
+              {publicNav.map((item) => {
+                const isActive = active === item.href;
+                return (
+                  <li key={item.href}>
+                    <button
+                      onClick={() => {
+                        setOpen(false);
+                        scrollTo(item.href);
+                      }}
+                      className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-medium transition ${
+                        isActive ? 'bg-white/10 text-ink-50' : 'text-ink-200 hover:bg-white/5'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
             <button
               onClick={() => {

@@ -1,13 +1,19 @@
-import { useEffect, useState } from 'react';
-import PortalHeader, { type PortalView } from './portal/PortalHeader';
+import { useEffect } from 'react';
+import PortalHeader from './portal/PortalHeader';
 import JadwalPelajaran from './portal/JadwalPelajaran';
 import JadwalPiket from './portal/JadwalPiket';
 import TugasMingguIni from './portal/TugasMingguIni';
+import PortalGreeting from './portal/PortalGreeting';
 import ScrollProgress from './ScrollProgress';
 import { useReveal } from '../hooks/useReveal';
 
-export default function PortalExperience({ onExit }: { onExit: () => void }) {
-  const [view, setView] = useState<PortalView>('schedule');
+export default function PortalExperience({
+  onExit,
+  onPublic,
+}: {
+  onExit: () => void;
+  onPublic: () => void;
+}) {
   useReveal();
 
   useEffect(() => {
@@ -16,11 +22,12 @@ export default function PortalExperience({ onExit }: { onExit: () => void }) {
   }, []);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen screen-enter">
       <ScrollProgress />
-      <PortalHeader view={view} onView={setView} onExit={onExit} />
+      <PortalHeader onView={() => {}} onExit={onExit} onPublic={onPublic} />
 
       <main>
+        <PortalGreeting />
         <JadwalPelajaran />
         <JadwalPiket />
         <TugasMingguIni />

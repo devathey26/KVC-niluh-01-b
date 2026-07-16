@@ -1,11 +1,11 @@
-import { ArrowRight, LayoutDashboard, Sparkles } from 'lucide-react';
+import { ArrowRight, LayoutDashboard } from 'lucide-react';
 import { scrollTo } from '../hooks/useReveal';
 
 type Experience = 'public' | 'portal';
 
 export default function Welcome({ onEnter }: { onEnter: (e: Experience) => void }) {
   return (
-    <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4">
+    <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 fade-in-soft">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-grid-soft [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
@@ -18,42 +18,30 @@ export default function Welcome({ onEnter }: { onEnter: (e: Experience) => void 
 
       <div className="relative mx-auto max-w-3xl text-center">
         {/* Eyebrow */}
-        <div className="reveal is-visible flex justify-center mb-6">
+        <div className="flex justify-center mb-8">
           <span className="chip border-brand-400/30 bg-brand-500/10 text-brand-200">
-            <Sparkles className="h-3.5 w-3.5" />
             Kelas XI DKV 2 · SMK TI Bali Global Denpasar
           </span>
         </div>
 
         {/* Title */}
-        <h1
-          className="reveal is-visible font-display text-[clamp(3rem,9vw,7rem)] font-extrabold leading-[0.92] tracking-tight"
-          style={{ transitionDelay: '80ms' }}
-        >
+        <h1 className="font-display text-[clamp(3rem,9vw,7rem)] font-extrabold leading-[0.92] tracking-tight">
           <span className="bg-gradient-to-br from-cream-50 via-cream-200 to-brand-300 bg-clip-text text-transparent">
             Kavitwo Connect
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p
-          className="reveal is-visible mx-auto mt-6 max-w-xl text-lg sm:text-xl text-ink-200 leading-relaxed"
-          style={{ transitionDelay: '160ms' }}
-        >
-          Rumah digital Kelas XI DKV 2. Ruang yang tenang dan rapi untuk jadwal,
-          pengumuman, galeri, dan karya kreatif kami — dibuat oleh kelas, untuk
-          kelas.
+        <p className="mx-auto mt-6 max-w-md text-lg sm:text-xl text-ink-200 leading-relaxed">
+          Rumah digital Kelas XI DKV 2.
         </p>
 
         {/* Actions */}
-        <div
-          className="reveal is-visible mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
-          style={{ transitionDelay: '240ms' }}
-        >
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             onClick={() => {
               onEnter('public');
-              setTimeout(() => scrollTo('#home'), 60);
+              setTimeout(() => scrollTo('#home'), 80);
             }}
             className="btn-primary w-full sm:w-auto"
           >
@@ -70,10 +58,7 @@ export default function Welcome({ onEnter }: { onEnter: (e: Experience) => void 
         </div>
 
         {/* Footer hint */}
-        <div
-          className="reveal is-visible mt-16 flex items-center justify-center gap-3 text-ink-400"
-          style={{ transitionDelay: '320ms' }}
-        >
+        <div className="mt-16 flex items-center justify-center gap-3 text-ink-400">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-brand-400/60" />
           <span className="text-xs uppercase tracking-[0.2em]">Pilih pengalamanmu</span>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-brand-400/60" />

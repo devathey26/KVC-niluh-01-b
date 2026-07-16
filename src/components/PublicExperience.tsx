@@ -18,7 +18,7 @@ export default function PublicExperience({ onPortal, onHome }: { onPortal: () =>
   }, []);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen screen-enter">
       <ScrollProgress />
       <PublicNavbar onPortal={onPortal} />
 

@@ -34,13 +34,11 @@ export default function Hero() {
           </div>
 
           <p
-            className="reveal is-visible max-w-xl text-lg sm:text-xl text-ink-200 leading-relaxed"
+            className="reveal is-visible max-w-md text-lg sm:text-xl text-ink-200 leading-relaxed"
             style={{ transitionDelay: '160ms' }}
           >
-            Rumah digital{' '}
-            <span className="text-ink-50 font-medium">Kelas XI DKV 2</span>. Ruang
-            yang tenang dan rapi untuk jadwal, pengumuman, galeri, dan karya
-            kreatif kami — dibuat oleh kelas, untuk kelas.
+            Selamat datang di ruang kreatif kami — tempat karya, cerita, dan
+            keseharian Kelas XI DKV 2 berkumpul.
           </p>
 
           <div
