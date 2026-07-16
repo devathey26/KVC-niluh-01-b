@@ -36,7 +36,7 @@ export default function TugasMingguIni() {
             <BookOpen className="h-3.5 w-3.5" />
             Tugas Minggu Ini
           </span>
-          <h2 className="section-title">Tugas aktif, urut deadline.</h2>
+          <h2 className="section-title">Tugas yang sedang berjalan.</h2>
           <p className="section-sub">
             Semua tugas aktif untuk minggu ini, diurutkan berdasarkan tanggal
             pengumpulan terdekat.

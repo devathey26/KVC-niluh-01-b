@@ -25,7 +25,7 @@ export default function JadwalPelajaran() {
   const isToday = today === active;
 
   return (
-    <section id="schedule" className="relative pt-28 pb-16">
+    <section id="schedule" className="relative pt-12 pb-16">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute right-1/4 top-10 h-72 w-72 rounded-full bg-brand-500/10 blur-3xl" />
       </div>

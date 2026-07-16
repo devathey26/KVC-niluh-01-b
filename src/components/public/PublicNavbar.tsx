@@ -43,12 +43,12 @@ export default function PublicNavbar({ onPortal }: { onPortal: () => void }) {
           }`}
         >
           {/* Brand */}
-          <button onClick={() => scrollTo('#home')} className="group flex items-center gap-2.5 pl-1.5 pr-2">
+          <button onClick={() => scrollTo('#home')} className="group flex items-center gap-2.5 px-1">
             <span className="relative flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-cream-50 shadow-glow">
               <Sparkles className="h-4 w-4" />
               <span className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/20" />
             </span>
-            <span className="font-display text-base font-bold tracking-tight text-ink-50">Kavitwo</span>
+            <span className="font-display text-base font-bold tracking-tight text-ink-50 leading-none">Kavitwo</span>
           </button>
 
           {/* Desktop nav */}
@@ -96,8 +96,8 @@ export default function PublicNavbar({ onPortal }: { onPortal: () => void }) {
 
         {/* Mobile menu */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-500 ease-smooth ${
-            open ? 'max-h-[32rem] mt-2 opacity-100' : 'max-h-0 opacity-0'
+          className={`lg:hidden overflow-hidden transition-[max-height,margin,opacity,filter] duration-500 ease-smooth ${
+            open ? 'max-h-[32rem] mt-2 opacity-100 blur-0' : 'max-h-0 mt-0 opacity-0 blur-sm'
           }`}
         >
           <div className="glass-strong rounded-3xl p-3 shadow-card">

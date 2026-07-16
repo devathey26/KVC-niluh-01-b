@@ -24,7 +24,7 @@ export default function JadwalPiket() {
             <ClipboardList className="h-3.5 w-3.5" />
             Jadwal Piket
           </span>
-          <h2 className="section-title">Tugas piket minggu ini.</h2>
+          <h2 className="section-title">Hari Ini</h2>
           <p className="section-sub">
             Koordinator dan anggota piket untuk setiap hari. Hari ini disorot
             otomatis.

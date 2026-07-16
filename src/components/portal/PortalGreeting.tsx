@@ -27,25 +27,26 @@ export default function PortalGreeting() {
   });
 
   return (
-    <section className="relative pt-24 pb-2">
+    <section className="relative pt-24 pb-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="reveal is-visible flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-500/15 text-brand-300 ring-1 ring-inset ring-brand-400/30">
-              <Icon className="h-4 w-4" />
+        <div className="reveal is-visible flex flex-col items-center text-center">
+          {/* Time as focus */}
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-5xl sm:text-6xl font-extrabold tracking-tight text-ink-50 tabular-nums">
+              {time}
             </span>
-            <div>
-              <p className="text-sm font-medium text-ink-100">
-                {text}, warga Kavitwo.
-              </p>
-              <p className="text-xs text-ink-400">{date}</p>
-            </div>
+            <span className="text-sm text-ink-400">WITA</span>
           </div>
 
-          <div className="flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-4 py-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse-soft" />
-            <span className="font-display text-base font-semibold text-ink-50 tabular-nums">{time}</span>
-            <span className="text-xs text-ink-400">WITA</span>
+          {/* Date below time */}
+          <p className="mt-1.5 text-sm text-ink-300">{date}</p>
+
+          {/* Greeting below date */}
+          <div className="mt-3 flex items-center gap-2 text-ink-200">
+            <Icon className="h-4 w-4 text-brand-300" />
+            <span className="text-sm font-medium">
+              {text}, warga Kavitwo.
+            </span>
           </div>
         </div>
       </div>
