@@ -1,22 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
-import { gallery, type GalleryItem } from '../lib/data';
-import { useReveal } from '../hooks/useReveal';
-
-const categories: (GalleryItem['category'] | 'Semua')[] = [
-  'Semua',
-  'Acara',
-  'Aktivitas Kelas',
-  'Behind The Scenes',
-  'Proyek',
-  'Kompetisi',
-];
+import { gallery, type GalleryItem } from '../../lib/data';
+import { useReveal } from '../../hooks/useReveal';
 
 export default function Gallery() {
-  const [filter, setFilter] = useState<(typeof categories)[number]>('Semua');
   const [active, setActive] = useState<number | null>(null);
-
   useReveal();
+
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    gallery.forEach((g) => set.add(g.category));
+    return ['Semua', ...Array.from(set)];
+  }, []);
+
+  const [filter, setFilter] = useState<string>('Semua');
 
   const list = useMemo(() => {
     if (filter === 'Semua') return gallery;
@@ -35,11 +32,7 @@ export default function Gallery() {
   }, [active, list.length]);
 
   const spanClass = (s: GalleryItem['span']) =>
-    s === 'tall'
-      ? 'row-span-2'
-      : s === 'wide'
-      ? 'sm:col-span-2'
-      : '';
+    s === 'tall' ? 'row-span-2' : s === 'wide' ? 'sm:col-span-2' : '';
 
   return (
     <section id="gallery" className="relative py-20 sm:py-28">
@@ -51,8 +44,8 @@ export default function Gallery() {
           </span>
           <h2 className="section-title">Momen, dibingkai dengan niat.</h2>
           <p className="section-sub">
-            Grid masonry dari acara, proyek, dan momen behind-the-scenes kami.
-            Ketuk gambar apa pun untuk membuka lightbox.
+            Koleksi dokumentasi dan kenangan kelas. Ketuk gambar apa pun untuk
+            membuka lightbox.
           </p>
         </div>
 
@@ -83,9 +76,7 @@ export default function Gallery() {
               key={item.id}
               onClick={() => setActive(i)}
               data-reveal-delay={(i % 4) * 60}
-              className={`reveal group relative overflow-hidden rounded-3xl border border-white/5 bg-ink-800/60 ${spanClass(
-                item.span
-              )}`}
+              className={`reveal group relative overflow-hidden rounded-3xl border border-white/5 bg-ink-800/60 ${spanClass(item.span)}`}
             >
               <img
                 src={item.src}
@@ -96,12 +87,8 @@ export default function Gallery() {
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="absolute inset-0 flex flex-col justify-end p-4 text-left">
-                <span className="text-[10px] uppercase tracking-wider text-brand-200">
-                  {item.category}
-                </span>
-                <h3 className="mt-1 text-sm font-semibold text-ink-50 line-clamp-2">
-                  {item.title}
-                </h3>
+                <span className="text-[10px] uppercase tracking-wider text-brand-200">{item.category}</span>
+                <h3 className="mt-1 text-sm font-semibold text-ink-50 line-clamp-2">{item.title}</h3>
               </div>
 
               <span className="absolute top-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-ink-50 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 scale-90">
@@ -110,6 +97,12 @@ export default function Gallery() {
             </button>
           ))}
         </div>
+
+        {list.length === 0 && (
+          <div className="reveal card-surface p-10 text-center text-ink-300">
+            Tidak ada foto dalam kategori ini.
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -146,10 +139,7 @@ export default function Gallery() {
             <ChevronRight className="h-5 w-5" />
           </button>
 
-          <figure
-            className="relative max-w-4xl w-full animate-fade-up"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <figure className="relative max-w-4xl w-full animate-fade-up" onClick={(e) => e.stopPropagation()}>
             <img
               src={list[active].src}
               alt={list[active].title}
@@ -157,12 +147,8 @@ export default function Gallery() {
             />
             <figcaption className="mt-4 flex items-center justify-between text-sm text-ink-200">
               <div>
-                <div className="text-[10px] uppercase tracking-wider text-brand-300">
-                  {list[active].category}
-                </div>
-                <div className="font-medium text-ink-50">
-                  {list[active].title}
-                </div>
+                <div className="text-[10px] uppercase tracking-wider text-brand-300">{list[active].category}</div>
+                <div className="font-medium text-ink-50">{list[active].title}</div>
               </div>
               <span className="text-xs text-ink-400 tabular-nums">
                 {active + 1} / {list.length}

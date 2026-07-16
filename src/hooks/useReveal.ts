@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Adds `is-visible` to any element with the `reveal` class when it enters
- * the viewport. Uses a single shared IntersectionObserver per invocation.
- *
- * Re-scans on every render so that elements added later by local state
- * changes (tab/filter switches) are also observed and revealed.
+ * the viewport. Re-scans on every render so dynamically added elements
+ * are also observed.
  */
 export function useReveal() {
   useEffect(() => {
@@ -37,4 +35,22 @@ export function useReveal() {
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   });
+}
+
+/** Tracks whether the page has been scrolled past `threshold` pixels. */
+export function useScrolled(threshold = 16) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [threshold]);
+  return scrolled;
+}
+
+/** Smooth-scrolls to a selector and optionally updates active section. */
+export function scrollTo(href: string) {
+  const el = document.querySelector(href);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

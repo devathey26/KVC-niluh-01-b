@@ -1,7 +1,7 @@
-import { Sparkles, Instagram, Mail, MapPin, Phone, Globe } from 'lucide-react';
-import { navItems } from '../lib/data';
+import { Sparkles, Instagram, Mail, MapPin, Phone, Globe, ArrowLeft } from 'lucide-react';
+import { publicNav } from '../../lib/data';
 
-export default function Footer() {
+export default function Footer({ onHome }: { onHome: () => void }) {
   return (
     <footer className="relative mt-10 border-t border-white/5">
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -17,12 +17,8 @@ export default function Footer() {
                 <Sparkles className="h-4 w-4" />
               </span>
               <div className="flex flex-col leading-none">
-                <span className="font-display text-lg font-bold text-ink-50">
-                  Kavitwo
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-ink-400">
-                  Class XI DKV 2
-                </span>
+                <span className="font-display text-lg font-bold text-ink-50">Kavitwo</span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-ink-400">Class XI DKV 2</span>
               </div>
             </div>
             <p className="mt-4 max-w-sm text-sm text-ink-300 leading-relaxed">
@@ -33,13 +29,13 @@ export default function Footer() {
 
             <div className="mt-5 flex items-center gap-2">
               {[
-                { Icon: Instagram, label: 'Instagram', href: '#' },
-                { Icon: Mail, label: 'Email', href: '#' },
-                { Icon: Globe, label: 'Website', href: '#' },
-              ].map(({ Icon, label, href }) => (
+                { Icon: Instagram, label: 'Instagram' },
+                { Icon: Mail, label: 'Email' },
+                { Icon: Globe, label: 'Website' },
+              ].map(({ Icon, label }) => (
                 <a
                   key={label}
-                  href={href}
+                  href="#"
                   aria-label={label}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-ink-200 hover:bg-white/10 hover:text-brand-200 hover:-translate-y-0.5 transition-all duration-300 ease-smooth"
                 >
@@ -51,16 +47,11 @@ export default function Footer() {
 
           {/* Nav */}
           <div className="md:col-span-3">
-            <h4 className="text-xs uppercase tracking-wider text-ink-400">
-              Navigasi
-            </h4>
+            <h4 className="text-xs uppercase tracking-wider text-ink-400">Navigasi</h4>
             <ul className="mt-4 grid grid-cols-2 gap-y-2 gap-x-3">
-              {navItems.map((n) => (
+              {publicNav.map((n) => (
                 <li key={n.href}>
-                  <a
-                    href={n.href}
-                    className="text-sm text-ink-200 hover:text-brand-200 transition"
-                  >
+                  <a href={n.href} className="text-sm text-ink-200 hover:text-brand-200 transition">
                     {n.label}
                   </a>
                 </li>
@@ -70,9 +61,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="md:col-span-4">
-            <h4 className="text-xs uppercase tracking-wider text-ink-400">
-              Kontak
-            </h4>
+            <h4 className="text-xs uppercase tracking-wider text-ink-400">Kontak</h4>
             <ul className="mt-4 space-y-3 text-sm text-ink-200">
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-brand-300 mt-0.5 shrink-0" />
@@ -98,12 +87,15 @@ export default function Footer() {
 
         <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-ink-400">
-            © {new Date().getFullYear()} Kavitwo · Kelas XI DKV 2. Hak cipta
-            dilindungi.
+            © {new Date().getFullYear()} Kavitwo · Kelas XI DKV 2. Hak cipta dilindungi.
           </p>
-          <p className="text-xs text-ink-400">
-            Dirancang &amp; dibuat dengan hati-hati di Denpasar.
-          </p>
+          <button
+            onClick={onHome}
+            className="inline-flex items-center gap-1.5 text-xs text-ink-400 hover:text-brand-200 transition"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Kembali ke Beranda
+          </button>
         </div>
       </div>
     </footer>

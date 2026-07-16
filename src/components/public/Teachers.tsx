@@ -1,7 +1,9 @@
 import { Mail, ArrowUpRight } from 'lucide-react';
-import { teachers } from '../lib/data';
+import { teachers } from '../../lib/data';
+import { useReveal } from '../../hooks/useReveal';
 
 export default function Teachers() {
+  useReveal();
   return (
     <section id="teachers" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -34,9 +36,7 @@ export default function Teachers() {
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 to-transparent" />
               </div>
 
-              <h3 className="mt-4 font-display text-lg font-semibold text-ink-50">
-                {t.name}
-              </h3>
+              <h3 className="mt-4 font-display text-lg font-semibold text-ink-50">{t.name}</h3>
               <p className="text-sm text-brand-300">{t.subject}</p>
 
               <a

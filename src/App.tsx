@@ -1,47 +1,31 @@
-import { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import ScrollProgress from './components/ScrollProgress';
-import Hero from './components/Hero';
-import WeeklySchedule from './components/WeeklySchedule';
-import Announcements from './components/Announcements';
-import Gallery from './components/Gallery';
-import Students from './components/Students';
-import Teachers from './components/Teachers';
-import Resources from './components/Resources';
-import Calendar from './components/Calendar';
-import Statistics from './components/Statistics';
-import About from './components/About';
-import Footer from './components/Footer';
-import { useReveal } from './hooks/useReveal';
+import { useEffect, useState } from 'react';
+import Welcome from './components/Welcome';
+import PublicExperience from './components/PublicExperience';
+import PortalExperience from './components/PortalExperience';
+
+type Screen = 'welcome' | 'public' | 'portal';
 
 function App() {
-  useReveal();
+  const [screen, setScreen] = useState<Screen>('welcome');
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
 
-  return (
-    <div className="relative min-h-screen">
-      <ScrollProgress />
-      <Navbar />
+  if (screen === 'welcome') {
+    return <Welcome onEnter={(e) => setScreen(e)} />;
+  }
 
-      <main>
-        <Hero />
-        <WeeklySchedule />
-        <Announcements />
-        <Gallery />
-        <Students />
-        <Teachers />
-        <Resources />
-        <Calendar />
-        <Statistics />
-        <About />
-      </main>
+  if (screen === 'public') {
+    return (
+      <PublicExperience
+        onPortal={() => setScreen('portal')}
+        onHome={() => setScreen('welcome')}
+      />
+    );
+  }
 
-      <Footer />
-    </div>
-  );
+  return <PortalExperience onExit={() => setScreen('welcome')} />;
 }
 
 export default App;
